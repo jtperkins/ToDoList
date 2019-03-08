@@ -3,8 +3,6 @@ package Utils;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-enum Priority {Low, Medium, High}
-
 public class Task {
     private String description;
     private Date dueDate;

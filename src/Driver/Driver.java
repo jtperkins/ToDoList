@@ -1,5 +1,6 @@
 package Driver;
 
+import Utils.Priority;
 import Utils.Task;
 import Utils.ToDoList;
 
@@ -22,6 +23,9 @@ public class Driver {
         boolean quit = false;
         boolean modify = false;
         ToDoList<Task> list = new ToDoList<>();
+        ToDoList<Task> low = new ToDoList<>();
+        ToDoList<Task> medium = new ToDoList<>();
+        ToDoList<Task> high = new ToDoList<>();
 
 
         while(!quit)
@@ -142,24 +146,53 @@ public class Driver {
                     System.out.print("Enter the name of the task you wish to remove: ");
                     while(userInput.equalsIgnoreCase(""))
                     userInput = scan.nextLine();
-                    System.out.println(userInput);
-                    for (Task temp : list) {
+                    //System.out.println(userInput);
+
+                    for (Iterator<Task> iterator = list.iterator(); iterator.hasNext(); ) {
+                        Task temp = iterator.next();
+                        if (temp.getDescription().trim().equalsIgnoreCase(userInput)) {
+                            iterator.remove();
+                        }
+                    }
+
+                    /*for (Task temp : list) {
 
                         if (temp.getDescription().trim().equalsIgnoreCase(userInput))
                         {
                             list.remove(temp);
                             System.out.println("Removed task from list");
                         }
-                        /*else
-                            System.out.println("no such task");*/
+                        *//*else
+                            System.out.println("no such task");*//*
 
-                    }
+                    }*/
                     userInput = "";
                     break;
                 case 4: //display by priority
 
+                    for (Iterator<Task> iterator = list.iterator(); iterator.hasNext(); ) {
+                        Task temp = iterator.next();
+                        if (temp.getPriority() == Priority.Low) {
+                            low.add(temp);
+                        }
+                        else if (temp.getPriority() == Priority.Medium) {
+                            medium.add(temp);
+                        }
+                        else
+                            high.add(temp);
+                    }
+                    list.removeAll(list);
+                    list.addAll(low);
+                    list.addAll(medium);
+                    list.addAll(high);
 
-
+                    for (Task temp : list)
+                    {
+                        System.out.print(temp.getDescription() + " | ");
+                        System.out.print(temp.getPriority() + " | ");
+                        System.out.print(temp.getDueDate() + " | ");
+                        System.out.println(temp.isCompleted() + " | ");
+                    }
 
                     break;
                 case 5: //display by dueDate
