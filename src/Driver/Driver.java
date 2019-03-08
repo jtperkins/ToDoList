@@ -9,13 +9,13 @@ import java.util.*;
 public class Driver {
 
     public static void main(String[] args) {
-        String userInput;
+        String userInput = "";
         String description = "";
         String dateString;
         Date date = null;
         SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat formatter = new SimpleDateFormat("mmm dd yyyy");
-        DateFormat out = new SimpleDateFormat("dd mmm yyyy");
+        //SimpleDateFormat formatter = new SimpleDateFormat("mmm dd yyyy");
+        //DateFormat out = new SimpleDateFormat("dd mmm yyyy");
         String priority;
         Scanner scan = new Scanner(System.in);
         int input;
@@ -49,9 +49,10 @@ public class Driver {
                     description = "";
                     dateString = "";
                     priority = "";
+
+
                     //list.add(new Task(description, date, priority, false));
                     //parser.applyPattern("MMM dd yyyy");
-
                     //System.out.println(list.get(0).getPriority());
 
                     break;
@@ -59,10 +60,11 @@ public class Driver {
                     // I know there's a better way to do this, there has to be
                     int i = 0;
                     System.out.print("Enter the name of the task you wish to modify: ");
-                    userInput = scan.next();
+                    while (userInput.equalsIgnoreCase(""))
+                    userInput = scan.nextLine();
                     while(i < list.size())
                     {
-                        if (list.get(i).getDescription().equalsIgnoreCase(userInput))
+                        if (list.get(i).getDescription().trim().equalsIgnoreCase(userInput.trim()))
                         {
                             Task temp = list.get(i);
                             list.remove(i);
@@ -117,15 +119,17 @@ public class Driver {
                             {
                                 //modify = false;
                                 list.add(temp);
+                                userInput = "";
                                 break;
                             }
 
                         }
                         else
                         {
-                            System.out.println("no such task");
+                            //System.out.println("no such task");
+                            i++;
                             //modify = false;
-                            break;
+                            continue;
                         }
 
                     }
@@ -134,19 +138,23 @@ public class Driver {
                     //list.remove(list.indexOf(list.fo))
                     break;
                 case 3: //remove
-                    //int index = 0;
-                    /*System.out.print("Enter the name of the task you wish to remove: ");
-                    userInput = scan.next();
+
+                    System.out.print("Enter the name of the task you wish to remove: ");
+                    while(userInput.equalsIgnoreCase(""))
+                    userInput = scan.nextLine();
+                    System.out.println(userInput);
                     for (Task temp : list) {
 
-                        if (temp.getDescription().equalsIgnoreCase(userInput))
+                        if (temp.getDescription().trim().equalsIgnoreCase(userInput))
                         {
                             list.remove(temp);
                             System.out.println("Removed task from list");
                         }
-                        else
-                            System.out.println("no such task");
-                    }*/
+                        /*else
+                            System.out.println("no such task");*/
+
+                    }
+                    userInput = "";
                     break;
                 case 4: //display by priority
 
@@ -155,7 +163,7 @@ public class Driver {
 
                     break;
                 case 5: //display by dueDate
-                    // not a fan of deleting stuff, its my messy way of remembering my attempts at doing something
+
                     Collections.sort(list, new Comparator<Task>() {
                         @Override
                         public int compare(Task o1, Task o2) {
@@ -172,14 +180,6 @@ public class Driver {
                     break;
                 case 6: //filter/unFilter complete tasks
 
-                    // not a fan of deleting stuff, its my messy way of remembering my attempts at doing something
-                    /*Collections.sort(list, new Comparator<Task>() {
-                        @Override
-                        public int compare(Task o1, Task o2) {
-                            if (o1.isCompleted())
-                                return o1;
-                        }
-                    });*/
                     for (Task temp : list)
                     {
                         if (temp.isCompleted()) {
@@ -193,12 +193,9 @@ public class Driver {
                 case 7: //save
                     list.saveToFile(list);
                     list.closeFile();
-                    //System.out.println("Saved to file");
                     break;
                 case 8: //load
-
                     list = list.loadFile();
-
                     break;
                 case 9:
                     System.exit(0);

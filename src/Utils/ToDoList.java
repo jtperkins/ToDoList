@@ -10,7 +10,7 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class ToDoList<T> extends LinkedList<T> {
-    Scanner scan = new Scanner(System.in);
+    //Scanner scan = new Scanner(System.in);
     Scanner read;
     FileWriter fw;
     SimpleDateFormat parser = new SimpleDateFormat("MMM dd, yyyy");
@@ -18,7 +18,7 @@ public class ToDoList<T> extends LinkedList<T> {
     String priority;
     String description;
     boolean completed;
-    String dateString;
+    //String dateString;
     public ToDoList() {
         super();
         new LinkedList<Task>();
@@ -105,7 +105,7 @@ public class ToDoList<T> extends LinkedList<T> {
         return list;
     }
 
-    public int binarySearch(LinkedList<Comparable> arr, Comparable key) {
+    /*public int binarySearch(LinkedList<Comparable> arr, Comparable key) {
         return binarySearch(arr, 0, arr.size() - 1, key);
     }
 
@@ -135,7 +135,7 @@ public class ToDoList<T> extends LinkedList<T> {
 
         }
         return null;
-    }
+    }*/
 
 
 }

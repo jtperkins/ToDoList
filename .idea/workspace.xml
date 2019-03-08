@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5c913c39-dd42-492e-b77b-81a400b73533" name="Default Changelist" comment="implemented sorting by due date using comparator">
+    <list default="true" id="5c913c39-dd42-492e-b77b-81a400b73533" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToDoList.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ToDoList.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ToDoList/Driver/Driver.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ToDoList/Driver/Driver.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ToDoList/Utils/ToDoList.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ToDoList/Utils/ToDoList.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Driver/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Driver/Driver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Utils/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utils/Task.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Utils/ToDoList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utils/ToDoList.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -47,8 +46,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Utils/ToDoList.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="142">
-              <caret line="97" column="41" selection-start-line="97" selection-start-column="41" selection-end-line="97" selection-end-column="41" />
+            <state relative-caret-position="-51">
+              <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -59,8 +58,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Driver/Driver.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2074">
-              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+            <state relative-caret-position="-1101">
+              <caret line="71" column="29" lean-forward="true" selection-start-line="71" selection-start-column="29" selection-end-line="71" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#7004#7005#0" expanded="true" />
@@ -138,7 +137,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552069174824" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552071212028" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
   <component name="RecentsManager">
@@ -212,11 +211,42 @@
       <option name="project" value="LOCAL" />
       <updated>1552069117613</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="implemented sorting by due date using comparator">
+      <created>1552069173411</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1552069173411</updated>
+    </task>
+    <task id="LOCAL-00005" summary="implemented save file and close with seperate function call to properly save all tasks">
+      <created>1552069220098</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1552069220098</updated>
+    </task>
+    <task id="LOCAL-00006" summary="reverted back to ToDoList over class implemented LList as it works with Collections.sort out the box">
+      <created>1552069273777</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1552069273777</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="295" y="44" width="1400" height="1000" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26119402" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -227,15 +257,15 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3298731" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3298731" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39907727" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3298731" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.3298731" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32641292" />
-      <window_info active="true" anchor="bottom" id="Messages" order="10" visible="true" weight="0.3298731" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.3298731" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -290,7 +320,33 @@
     <MESSAGE value="This is the first commit" />
     <MESSAGE value="implemented loading txt file" />
     <MESSAGE value="implemented sorting by due date using comparator" />
-    <option name="LAST_COMMIT_MESSAGE" value="implemented sorting by due date using comparator" />
+    <MESSAGE value="implemented save file and close with seperate function call to properly save all tasks" />
+    <MESSAGE value="reverted back to ToDoList over class implemented LList as it works with Collections.sort out the box" />
+    <option name="LAST_COMMIT_MESSAGE" value="reverted back to ToDoList over class implemented LList as it works with Collections.sort out the box" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Driver/Driver.java</url>
+          <line>147</line>
+          <properties />
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Driver/Driver.java</url>
+          <line>70</line>
+          <properties />
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Driver/Driver.java</url>
+          <line>131</line>
+          <properties />
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
@@ -369,8 +425,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Utils/ToDoList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="97" column="41" selection-start-line="97" selection-start-column="41" selection-end-line="97" selection-end-column="41" />
+        <state relative-caret-position="-51">
+          <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -379,8 +435,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Driver/Driver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2074">
-          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        <state relative-caret-position="-1101">
+          <caret line="71" column="29" lean-forward="true" selection-start-line="71" selection-start-column="29" selection-end-line="71" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#7004#7005#0" expanded="true" />
