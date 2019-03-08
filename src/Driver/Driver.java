@@ -4,15 +4,13 @@ import Utils.Task;
 import Utils.ToDoList;
 
 import java.text.*;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.Scanner;
+import java.util.*;
 
 public class Driver {
 
     public static void main(String[] args) {
         String userInput;
-        String description;
+        String description = "";
         String dateString;
         Date date = null;
         SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
@@ -32,8 +30,25 @@ public class Driver {
             input = scan.nextInt();
 
             switch (input) {
-                case 1: //add
-                    list.add(list.addTask());
+                case 1:
+                    System.out.println("Add a task to the list");
+                    System.out.print("Enter a description for the task: ");
+                    while (description.equalsIgnoreCase(""))
+                    description = scan.nextLine();
+                    System.out.println("Enter the date in the format yyyy-mm-dd: ");
+                    dateString = scan.next();
+                    try {
+                        date = parser.parse(dateString);
+                    } catch (ParseException e)
+                    {
+                        System.out.println("you didn't put the right format in");
+                    }
+                    System.out.println("Enter the priority i.e. Low, Medium, or High");
+                    priority = scan.next();
+                    list.add(new Task(description, date, priority, false));
+                    description = "";
+                    dateString = "";
+                    priority = "";
                     //list.add(new Task(description, date, priority, false));
                     //parser.applyPattern("MMM dd yyyy");
 
@@ -50,7 +65,7 @@ public class Driver {
                         if (list.get(i).getDescription().equalsIgnoreCase(userInput))
                         {
                             Task temp = list.get(i);
-                            list.remove(temp);
+                            list.remove(i);
                             while(!modify)
                             {
                                 System.out.println("What would you like to modify? ");
@@ -120,7 +135,7 @@ public class Driver {
                     break;
                 case 3: //remove
                     //int index = 0;
-                    System.out.print("Enter the name of the task you wish to remove: ");
+                    /*System.out.print("Enter the name of the task you wish to remove: ");
                     userInput = scan.next();
                     for (Task temp : list) {
 
@@ -131,21 +146,62 @@ public class Driver {
                         }
                         else
                             System.out.println("no such task");
-                    }
+                    }*/
                     break;
                 case 4: //display by priority
+
+
+
+
                     break;
                 case 5: //display by dueDate
+                    // not a fan of deleting stuff, its my messy way of remembering my attempts at doing something
+                    Collections.sort(list, new Comparator<Task>() {
+                        @Override
+                        public int compare(Task o1, Task o2) {
+                            return o1.getDueDate().compareTo(o2.getDueDate());
+                        }
+                    });
+                    for (Task temp : list)
+                    {
+                        System.out.print(temp.getDescription() + " | ");
+                        System.out.print(temp.getPriority() + " | ");
+                        System.out.print(temp.getDueDate() + " | ");
+                        System.out.println(temp.isCompleted() + " | ");
+                    }
                     break;
                 case 6: //filter/unFilter complete tasks
+
+                    // not a fan of deleting stuff, its my messy way of remembering my attempts at doing something
+                    /*Collections.sort(list, new Comparator<Task>() {
+                        @Override
+                        public int compare(Task o1, Task o2) {
+                            if (o1.isCompleted())
+                                return o1;
+                        }
+                    });*/
+                    for (Task temp : list)
+                    {
+                        if (temp.isCompleted()) {
+                            System.out.print(temp.getDescription() + " | ");
+                            System.out.print(temp.getPriority() + " | ");
+                            System.out.print(temp.getDueDate() + " | ");
+                            System.out.println(temp.isCompleted() + " | ");
+                        }
+                    }
                     break;
                 case 7: //save
                     list.saveToFile(list);
-                    System.out.println("Saved to file");
+                    list.closeFile();
+                    //System.out.println("Saved to file");
                     break;
                 case 8: //load
+
+                    list = list.loadFile();
+
                     break;
-                case 9: System.exit(0);
+                case 9:
+                    System.exit(0);
                     break;
                 default:
                     System.out.println("Invalid input, Try again.");
@@ -155,7 +211,6 @@ public class Driver {
 
             }
         }
-
     }
 
     public static void Menu() {
