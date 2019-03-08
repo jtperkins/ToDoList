@@ -53,4 +53,5 @@ public class Task {
     public void setPriority(String priority) {
         this.priority = Priority.valueOf(priority.substring(0, 1).toUpperCase() + priority.substring(1));;
     }
+
 }
