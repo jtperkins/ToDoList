@@ -3,25 +3,24 @@ package Driver;
 import Utils.Priority;
 import Utils.Task;
 import Utils.ToDoList;
-
+import java.io.IOException;
 import java.text.*;
 import java.util.*;
 
 public class Driver {
 
     public static void main(String[] args) {
+        String fileName = "";
         String userInput = "";
         String description = "";
         String dateString;
         Date date = null;
         SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
-        //SimpleDateFormat formatter = new SimpleDateFormat("mmm dd yyyy");
-        //DateFormat out = new SimpleDateFormat("dd mmm yyyy");
         String priority;
         Scanner scan = new Scanner(System.in);
         int input;
         boolean quit = false;
-        boolean modify = false;
+        boolean modify;
         ToDoList<Task> list = new ToDoList<>();
         ToDoList<Task> low = new ToDoList<>();
         ToDoList<Task> medium = new ToDoList<>();
@@ -51,17 +50,12 @@ public class Driver {
                     priority = scan.next();
                     list.add(new Task(description, date, priority, false));
                     description = "";
-                    dateString = "";
-                    priority = "";
-
-
-                    //list.add(new Task(description, date, priority, false));
-                    //parser.applyPattern("MMM dd yyyy");
-                    //System.out.println(list.get(0).getPriority());
 
                     break;
                 case 2: //modify
                     // I know there's a better way to do this, there has to be
+                    modify = false;
+                    userInput = "";
                     int i = 0;
                     System.out.print("Enter the name of the task you wish to modify: ");
                     while (userInput.equalsIgnoreCase(""))
@@ -70,6 +64,7 @@ public class Driver {
                     {
                         if (list.get(i).getDescription().trim().equalsIgnoreCase(userInput.trim()))
                         {
+                            userInput = "";
                             Task temp = list.get(i);
                             list.remove(i);
                             while(!modify)
@@ -86,7 +81,8 @@ public class Driver {
                                 {
                                     case 1:
                                         System.out.println("enter new description: ");
-                                        userInput = scan.next();
+                                        while (userInput.equalsIgnoreCase(""))
+                                        userInput = scan.nextLine();
                                         temp.setDescription(userInput);
                                         break;
                                     case 2:
@@ -118,10 +114,10 @@ public class Driver {
                                         break;
 
                                 }
+                                userInput = "";
                             }
                             if (modify)
                             {
-                                //modify = false;
                                 list.add(temp);
                                 userInput = "";
                                 break;
@@ -130,42 +126,33 @@ public class Driver {
                         }
                         else
                         {
-                            //System.out.println("no such task");
                             i++;
-                            //modify = false;
-                            continue;
                         }
-
                     }
-
-
-                    //list.remove(list.indexOf(list.fo))
                     break;
                 case 3: //remove
 
                     System.out.print("Enter the name of the task you wish to remove: ");
                     while(userInput.equalsIgnoreCase(""))
                     userInput = scan.nextLine();
-                    //System.out.println(userInput);
 
                     for (Iterator<Task> iterator = list.iterator(); iterator.hasNext(); ) {
                         Task temp = iterator.next();
                         if (temp.getDescription().trim().equalsIgnoreCase(userInput)) {
                             iterator.remove();
+                            System.out.println("removed task successfully");
                         }
                     }
 
-                    /*for (Task temp : list) {
+                    System.out.println();
+                    list.displayList(list);
 
-                        if (temp.getDescription().trim().equalsIgnoreCase(userInput))
-                        {
-                            list.remove(temp);
-                            System.out.println("Removed task from list");
-                        }
-                        *//*else
-                            System.out.println("no such task");*//*
-
-                    }*/
+                    System.out.println("press any key to continue...");
+                    try {
+                        System.in.read();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     userInput = "";
                     break;
                 case 4: //display by priority
@@ -185,15 +172,19 @@ public class Driver {
                     list.addAll(low);
                     list.addAll(medium);
                     list.addAll(high);
+                    low.clear();
+                    medium.clear();
+                    high.clear();
 
-                    for (Task temp : list)
-                    {
-                        System.out.print(temp.getDescription() + " | ");
-                        System.out.print(temp.getPriority() + " | ");
-                        System.out.print(temp.getDueDate() + " | ");
-                        System.out.println(temp.isCompleted() + " | ");
+                    System.out.println();
+                    list.displayList(list);
+
+                    System.out.println("press any key to continue...");
+                    try {
+                        System.in.read();
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-
                     break;
                 case 5: //display by dueDate
 
@@ -203,24 +194,39 @@ public class Driver {
                             return o1.getDueDate().compareTo(o2.getDueDate());
                         }
                     });
-                    for (Task temp : list)
-                    {
-                        System.out.print(temp.getDescription() + " | ");
-                        System.out.print(temp.getPriority() + " | ");
-                        System.out.print(temp.getDueDate() + " | ");
-                        System.out.println(temp.isCompleted() + " | ");
+
+                    System.out.println();
+                    list.displayList(list);
+
+                    System.out.println("press any key to continue...");
+                    try {
+                        System.in.read();
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
                     break;
                 case 6: //filter/unFilter complete tasks
 
+                    System.out.println();
                     for (Task temp : list)
                     {
-                        if (temp.isCompleted()) {
+                        if (!temp.isCompleted()) {
                             System.out.print(temp.getDescription() + " | ");
                             System.out.print(temp.getPriority() + " | ");
                             System.out.print(temp.getDueDate() + " | ");
-                            System.out.println(temp.isCompleted() + " | ");
+                            if (temp.isCompleted())
+                                System.out.println("completed");
+                            else
+                                System.out.println("not completed");
                         }
+                    }
+
+                    System.out.println();
+                    System.out.println("press any key to continue...");
+                    try {
+                        System.in.read();
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
                     break;
                 case 7: //save
@@ -228,22 +234,35 @@ public class Driver {
                     list.closeFile();
                     break;
                 case 8: //load
-                    list = list.loadFile();
+
+                    System.out.print("Enter the name of the file you wish to load: ");
+                    while (fileName.equalsIgnoreCase(""))
+                    fileName = scan.nextLine();
+                    list = list.loadFile(fileName);
+                    list.displayList(list);
+                    System.out.println("press any key to continue...");
+
+
+                    try {
+                        System.in.read();
+                        fileName = "";
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case 9:
+                    quit = true;
                     System.exit(0);
                     break;
                 default:
                     System.out.println("Invalid input, Try again.");
                     break;
-
-                //case 3: list.
-
             }
         }
     }
 
-    public static void Menu() {
+    private static void Menu() {
+        System.out.println("----- TO DO LIST MENU -----");
         System.out.println("\t1. Add a new task");
         System.out.println("\t2. Modify a task");
         System.out.println("\t3. Remove a task");

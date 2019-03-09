@@ -10,24 +10,15 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class ToDoList<T> extends LinkedList<T> {
-    //Scanner scan = new Scanner(System.in);
-    Scanner read;
-    FileWriter fw;
-    SimpleDateFormat parser = new SimpleDateFormat("MMM dd, yyyy");
-    Date date;
-    String priority;
-    String description;
-    boolean completed;
-    //String dateString;
+    private FileWriter fw;
+    private SimpleDateFormat parser = new SimpleDateFormat("MMM dd, yyyy");
+    private Date date;
+    private String priority;
+    private String description;
+    private boolean completed;
+
     public ToDoList() {
         super();
-        new LinkedList<Task>();
-    }
-
-
-
-    public Task modifyTask(int index) {
-        return null;
     }
 
     public void saveToFile(ToDoList<Task> list)
@@ -44,7 +35,7 @@ public class ToDoList<T> extends LinkedList<T> {
             try
             {
                 fw.write(temp.getDescription() + " | ");
-                fw.write(String.valueOf(temp.getPriority()) + " | ");
+                fw.write(temp.getPriority() + " | ");
                 fw.write(temp.getDueDate() + " | ");
                 fw.write(String.valueOf(temp.isCompleted()));
                 fw.append("\r\n");
@@ -61,21 +52,21 @@ public class ToDoList<T> extends LinkedList<T> {
         try
         {
             fw.close();
+            System.out.println("file saved successfully");
         } catch (IOException e)
         {
             System.out.println("failed to close out file");
         }
     }
 
-    public ToDoList<T> loadFile()
+    public ToDoList<T> loadFile(String fileName)
     {
         ToDoList list = new ToDoList();
         StringBuilder sb = new StringBuilder();
-        try (Scanner read = new Scanner(new FileReader("ToDoList.txt"))) {
+        try (Scanner read = new Scanner(new FileReader(fileName))) {
 
             while (read.hasNext()) {
                 sb.append(read.nextLine());
-                //System.out.println(sb.toString());
                 String[] splitup = sb.toString().split("\\|");
                 description = splitup[0].trim();
                 priority = splitup[1].trim();
@@ -88,54 +79,33 @@ public class ToDoList<T> extends LinkedList<T> {
                     completed = true;
                 else
                     completed = false;
-                /*for (String split : splitup)
-                {
-                    System.out.println(split);
-                    desc
-                }*/
 
                 list.add(new Task(description, date, priority, completed));
                 sb = new StringBuilder();
             }
-            //System.out.println(sb);
         } catch (IOException e) {
             System.out.println("Failed to load file");
         }
-
+        if (list.size() > 0)
+        {
+            System.out.println("file loaded successfully");
+            System.out.println();
+        }
         return list;
     }
 
-    /*public int binarySearch(LinkedList<Comparable> arr, Comparable key) {
-        return binarySearch(arr, 0, arr.size() - 1, key);
-    }
-
-    private int binarySearch(LinkedList<Comparable> arr, int first, int last, Comparable key) {
-        if (first > last) return -1;    //looked at everything
-
-        // find middle element
-        int mid = first + (last - first) / 2;
-
-        // check if the middle element is the key
-        if (arr.get(mid).compareTo(key) == 0) return mid;
-        else if(arr.get(mid).compareTo(key) < 0) return binarySearch(arr, mid + 1, last, key);
-        else return binarySearch(arr, first, mid - 1, key);
-    }
-
-    public Task sortedMerge(Task a, Task b)
-    {
-        Task result = null;
-        if (a == null)
-            return b;
-        if (b == null)
-            return a;
-
-        if (a.getPriority().equals(b.getPriority()))
+    public void displayList(ToDoList<Task> list) {
+        for (Task temp : list)
         {
-            result = a;
+            System.out.print(temp.getDescription() + " | ");
+            System.out.print(temp.getPriority() + " | ");
+            System.out.print(temp.getDueDate() + " | ");
+            if (temp.isCompleted())
+            System.out.println("completed");
+            else
+                System.out.println("not completed");
 
         }
-        return null;
-    }*/
-
-
+        System.out.println();
+    }
 }
